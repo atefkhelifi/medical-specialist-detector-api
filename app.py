@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
+
 from deep_translator import GoogleTranslator
 import google.generativeai as genai
 import requests  
@@ -8,7 +10,9 @@ import os
 app = Flask(__name__)
 
 # Load API key securely
-genai.configure(api_key=os.getenv("GEMINI_API_KEY", "AIzaSyBvQKeFV7BY0JJWOH40zt0IhMCJYuY9jn0"))  
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
 
 def translate_to_english(text):
     try:
